@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block js %}
+{% endblock %}
+
+
+{% block main %}
+
+<h4>My name is {{profile.first_name}}
+{{profile.last_name}} </h4>
+<h5>My Password is {{ profile.password }} and my ID is {{ profile.id_num }}</h5>
+
+
+<h3>Navigate to home page <a href="/">here</a></h3>
+{% endblock %}

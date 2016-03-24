@@ -1,0 +1,13 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block js %}
+{% endblock %}
+
+{% block main %}
+ <h1>Logged In</h1>
+{% for data in profile %}
+   
+    <h4>{{ data.first_name }} has logged in </h4><hr/>
+    {% endfor %}
+{% endblock %}
