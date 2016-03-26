@@ -63,11 +63,25 @@ def after_login(resp):
 # Routing for your application.
 ###
 @app.route('/login', methods=['GET', 'POST'])
-@oid.loginhandler
 def login():
-    profile = Myprofile.query.all()
-    print profile
-    return render_template('loggedin.html', profile=profile)
+    error = None
+    usernames = Myprofile.query.all()
+    if request.method == 'POST':
+        for names in usernames:
+            if request.form['username'] == names.username and request.form['password'] == names.password:
+                session['logged_in'] = True
+                return redirect(url_for('profile_view', id_num=names.id_num))
+        else:
+            error = "Invalid login data"
+    return render_template('login.html', error=error)
+    
+    
+@app.route('/logout')
+def logout():
+    """Render website's logout page."""
+    session.pop('logged_in', None)
+    return redirect(url_for('home'))
+
     
     
     #if g.user is not None and g.user.is_authenticated:
